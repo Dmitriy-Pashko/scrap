@@ -26,7 +26,7 @@ let scrape = async () => {
     const page = await browser.newPage();
     await page.goto('https://jobs.dou.ua/vacancies/?category=Front+End');
     await page.click('.more-btn > a');
-    await page.waitFor(1000);
+    await page.waitFor(3000);
 
     //making pagination gone
     // let btn = document.querySelector('.more-btn').childNodes[0];
@@ -48,7 +48,7 @@ let scrape = async () => {
         })
 
         return {
-            arr
+            arr,
         }
 
     });
