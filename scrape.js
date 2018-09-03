@@ -25,8 +25,18 @@ let scrape = async () => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.goto('https://jobs.dou.ua/vacancies/?category=Front+End');
-    await page.click('.more-btn > a');
-    await page.waitFor(3000);
+
+    while (page.$('.more-btn') !== null ) {
+        await page.click('.more-btn > a');
+    }
+    await page.waitFor(1000);
+    await page.once('load', () => console.log('Page loaded!'));
+    // if(page.$('.more-btn')){
+    //     await page.click('.more-btn > a');
+    //     await page.waitFor(1000);
+    // } else {
+    //     await page.once('load', () => console.log('Page loaded!'));
+    // }
 
     //making pagination gone
     // let btn = document.querySelector('.more-btn').childNodes[0];
