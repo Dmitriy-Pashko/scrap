@@ -26,34 +26,33 @@ let scrape = async () => {
     const page = await browser.newPage();
     await page.goto('https://jobs.dou.ua/vacancies/?category=Front+End');
 
-    for(i=0;i<3;i++){
-        await page.click('.more-btn > a');
-        await page.waitFor(4000);
-    }
-
-    // await page.waitForSelector('.more-btn')
-    //     .then(() => page.click('.more-btn > a'));
-
-    // while (page.$('.more-btn') !== null ) {
-    //     await page.click('.more-btn > a');
-    // }
-
-    await page.once('load', () => console.log('Page loaded!'));
-
     // Scrape
     const result = await page.evaluate(() => {
         let arr = [];
 
-        // document.querySelector('.more-btn > a').click();
-        let elements = document.querySelectorAll('.vacancy');
+        let more = async () => {
+            await page.waitForSelector('.more-btn');
+            await page.click('.more-btn > a');
+            await page.waitFor(1000);
+            await page.once('load', () => console.log('Page loaded!'));
 
-        elements.forEach((elem)=>{
-            let link = elem.childNodes[1].children[0].href;
-            let title = elem.childNodes[1].children[0].innerText;
-            let desc = elem.childNodes[3].innerText;
+            if (document.querySelector('.more-btn a:not([style*="display: none"])') !== nill) {
+                return more();
+            } else {
 
-            arr.push({link, title, desc});
-        })
+                let elements = document.querySelectorAll('.vacancy');
+
+                elements.forEach((elem)=>{
+                    let link = elem.childNodes[1].children[0].href;
+                    let title = elem.childNodes[1].children[0].innerText;
+                    let desc = elem.childNodes[3].innerText;
+
+                    arr.push({link, title, desc});
+                })
+            }
+        };
+
+        more();
 
         return {
             arr,

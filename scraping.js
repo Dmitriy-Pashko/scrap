@@ -10,8 +10,7 @@ function run (pagesToScrape) {
             if (!pagesToScrape) {
                 pagesToScrape = 1;
             }
-
-            console.log(pagesToScrape);
+            
             pagesToScrape = 2;
             const browser = await puppeteer.launch({headless: false});
             const page = await browser.newPage();
@@ -45,7 +44,8 @@ function run (pagesToScrape) {
                     await Promise.all([
                         await page.click('.more-btn > a'),
                         await page.waitForSelector('.more-btn'),
-                        await page.waitFor(1000)
+                        await page.waitFor(1000),
+                        await page.once('load', () => console.log('Page loaded!'))
                     ])
                 }
                 currentPage++;
