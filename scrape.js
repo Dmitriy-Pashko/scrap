@@ -7,7 +7,7 @@ let scrape = async () => {
 
     // Scrape
     const result = await page.evaluate(() => {
-        let arr = [];
+        // let arr = [];
 
         let more = async () => {
             await page.waitForSelector('.more-btn');
@@ -31,8 +31,6 @@ let scrape = async () => {
             }
         };
 
-        more();
-
         return {
             arr,
         }
@@ -44,4 +42,3 @@ let scrape = async () => {
 };
 
 scrape().then(console.log("Database stage"));
-

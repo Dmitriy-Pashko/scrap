@@ -1,31 +1,41 @@
 const puppeteer = require('puppeteer');
 
 let scrape = () => {
-    let browser = puppeteer.launch({headless: false})
+    puppeteer.launch({headless: false})
         .then((browser) => {
-            let page = browser.newPage();
-            return page;
+            return browser.newPage();
         })
         .then((page) => {
-            page.goto('https://jobs.dou.ua/vacancies/?category=Front+End');
-            return page;
-        })
-        .then((page) => {
-            page.waitFor(1000);
-            return page;
-        })
-        .then((page) => {
-            let result = page.evaluate(() => {
-                let more = () => {
-                    page.waitForSelector('.more-btn')
-                        .then((page) => {
-                            page.click('.more-btn > a');
-                        })
-                }
-            });
-            return result; 
-        })
+           return page.goto('https://jobs.dou.ua/vacancies/?category=Front+End')
+                .then(() => {
+                    let more = () => {
+                        if(page.$('.more-btn a:not([style*="display: none"])') !== null) {
+                            page.waitForSelector('.more-btn')
+                                .then(() => {
+                                    return page.waitFor(1000);
+                                })
+                                .then(() => {
+                                    return page.click('.more-btn > a');
+                                })
+                                .then(more);
+                        }
+                        else {
+                            return console.log("No more buttons!");
+                        }
 
+                    }
+                    return more();
+                })
+                // .then(() => {
+                //     return page.waitForSelector('.more-btn');
+                // })
+                // .then(() => {
+                //     return page.waitFor(1000);
+                // })
+                // .then(() => {
+                //     return page.click('.more-btn > a');
+                // })
+        })
 
         // browser.close();
 }
