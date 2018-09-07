@@ -18,7 +18,7 @@ let scrape = () => {
                                     else {
                                         return page.evaluate(()=>{
                                             let arr = [];
-                                            let elements = page.$$('.vacancy');
+                                            let elements = document.querySelectorAll('.vacancy');
                     
                                             elements.forEach((elem)=>{
                                                 let link = elem.childNodes[1].children[0].href;
