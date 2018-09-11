@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const saveDada = require('./savedata');
+const saveData = require('./savedata');
 
 let scrape = () => {
     return puppeteer.launch({headless: false})
@@ -29,11 +29,11 @@ let scrape = () => {
                                                 arr.push({link, title, desc});
                                             })
                                             return arr;
-                                        }).then((arr) => saveDada(arr));
+                                        }).then((arr) => saveData(arr));
                                     }
                                 })
                         }
-                        return more();
+                        return more().catch(err => console.log(err));
                     })              
             }).then(() => browser.close())
         )

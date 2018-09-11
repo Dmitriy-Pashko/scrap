@@ -12,9 +12,11 @@ let saveJobs = (jobsArray) => {
                 description: dou.desc,
             });
             job.save(function(err) {
-                if (err)
-                    return console.log(err);
-                return console.log('Job successfully added!');
+                return new Promise((resolve, reject) => {
+                    if (err)
+                        return reject(console.log(err));
+                    return resolve(true);
+                })
             });
         });
         if(arr){
