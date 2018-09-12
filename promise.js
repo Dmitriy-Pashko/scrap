@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const saveData = require('./savedata');
+const Promise = require('bluebird');
 
 let scrape = () => {
     return puppeteer.launch({headless: false})
@@ -16,21 +17,29 @@ let scrape = () => {
                                         return page.click('.more-btn > a')
                                             .then(more);
                                     }
-                                    else {
-                                        return page.evaluate(()=>{
-                                            let arr = [];
-                                            let elements = document.querySelectorAll('.vacancy');
-                    
-                                            elements.forEach((elem)=>{
-                                                let link = elem.childNodes[1].children[0].href;
-                                                let title = elem.childNodes[1].children[0].innerText;
-                                                let desc = elem.childNodes[3].innerText;
-                    
-                                                arr.push({link, title, desc});
-                                            })
-                                            return arr;
-                                        }).then((arr) => saveData(arr));
-                                    }
+                                    return page.evaluate(()=>{
+                                        let arr = [];
+                                        let elements = document.querySelectorAll('.vacancy');
+                                        
+                                        Promise.each(elements, function(elem) {
+                                            return console.log(elem);
+                                            // let link = elem.childNodes[1].children[0].href;
+                                            // let title = elem.childNodes[1].children[0].innerText;
+                                            // let desc = elem.childNodes[3].innerText;
+                
+                                            // arr.push({link, title, desc});
+                                            // return arr;
+                                        })
+                                        // elements.forEach((elem)=>{
+                                        //     let link = elem.childNodes[1].children[0].href;
+                                        //     let title = elem.childNodes[1].children[0].innerText;
+                                        //     let desc = elem.childNodes[3].innerText;
+                
+                                        //     arr.push({link, title, desc});
+                                        // })
+
+                                        return arr;
+                                    }).then((arr) => saveData(arr));
                                 })
                         }
                         return more().catch(err => console.log(err));
