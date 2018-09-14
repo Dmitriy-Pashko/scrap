@@ -42,4 +42,4 @@ let scrape = async () => {
     return result;
 };
 
-scrape().then(console.log("Scraping done"));
+scrape().then(console.log("Database stage"));
