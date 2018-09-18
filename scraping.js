@@ -27,7 +27,7 @@ let scrape = () => puppeteer.launch({headless: false})
                         }
                     }, mycounter))
                     .then((counter) => {
-                        // mycounter = counter;
+                        mycounter = counter;
                         console.log(counter);
                         if (counter) {
                             return chooseCategory()
