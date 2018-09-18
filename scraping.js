@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const saveData = require('./savedata');
 
+let mycounter = 1;
 let scrape = () => puppeteer.launch({headless: false})
     .then((browser) => browser.newPage()
         .then((page) => page.goto('https://jobs.dou.ua/')
@@ -24,8 +25,10 @@ let scrape = () => puppeteer.launch({headless: false})
                         } else {
                             return null;
                         }
-                    }, 1))
+                    }, mycounter))
                     .then((counter) => {
+                        // mycounter = counter;
+                        console.log(counter);
                         if (counter) {
                             return chooseCategory()
                         } else {
