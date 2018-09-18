@@ -11,8 +11,8 @@ let scrape = () => puppeteer.launch({headless: false})
                     .then(() => page.click('select'))
                     .then(() => page.waitFor(4000))
                     .then(() => page.evaluate((counter) => {
-                        let last = document.querySelector('option:last-child');
-                        let selectedOption = document.querySelector('option[selected]');
+                        let last = document.querySelector('option:last-child').text;
+                        let selectedOption = document.querySelector('option[selected]').text;
 
                         if(last != selectedOption){
                             let select = document.querySelector('select');
