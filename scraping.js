@@ -12,30 +12,21 @@ let scrape = () => puppeteer.launch({headless: false})
                     .then(() => page.waitFor(4000))
                     .then(() => page.evaluate((counter) => {
 
-                        let last = document.querySelector('option:last-child').text;
+                        let last = document.querySelector('option:last-child');
                         let selectedOption = document.querySelector('option[selected]');
                         let select = document.querySelector('select');
 
-                        if (selectedOption === null) {
+                        if (last != selectedOption) {
                             select.selectedIndex = counter;
                             counter++;
-                            return {
-                                counter
-                            }
-                        } else if (last != selectedOption.text) {
-                            select.selectedIndex = counter;
-                            counter++;
-                            return {
-                                counter
-                            }
-                        } else {
-                            return counter=4;
+                            return counter;
+                        }  else {
+                            return null;
                         }
                         
                     }, mycounter))
                     .then((counter) => {
                         mycounter = counter;
-                        console.log(counter);
                         if (counter) {
                             return page.evaluate(()=>{
                                 let select = document.querySelector('select');
