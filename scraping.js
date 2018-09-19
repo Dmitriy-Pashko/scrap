@@ -19,19 +19,17 @@ let scrape = () => puppeteer.launch({headless: false})
                         if (selectedOption === null) {
                             select.selectedIndex = counter;
                             counter++;
-                            select.parentNode.submit();
                             return {
                                 counter
                             }
                         } else if (last != selectedOption.text) {
                             select.selectedIndex = counter;
                             counter++;
-                            select.parentNode.submit();
                             return {
                                 counter
                             }
                         } else {
-                            return null;
+                            return counter=4;
                         }
                         
                     }, mycounter))
@@ -39,7 +37,10 @@ let scrape = () => puppeteer.launch({headless: false})
                         mycounter = counter;
                         console.log(counter);
                         if (counter) {
-                            return chooseCategory()
+                            return page.evaluate(()=>{
+                                let select = document.querySelector('select');
+                                select.parentNode.submit();
+                            }).then(() => chooseCategory());
                         } else {
                             return true;
                         }
