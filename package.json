@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "scrap": "nodemon server/scrap/scraping.js",
+    "server": "nodemon server/config/server.js"
+
   },
   "keywords": [],
   "author": "",
