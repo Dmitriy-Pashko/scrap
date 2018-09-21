@@ -68,4 +68,6 @@ let scrape = () => puppeteer.launch({headless: false})
             .then(() => chooseCategory(page))
         ).then(() => browser.close())
     ).catch((err) => console.log(err));
-scrape();
+
+    module.exports = scrape;
+
