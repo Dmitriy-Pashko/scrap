@@ -4,11 +4,15 @@ const saveData = require('./savedata');
 let mycounter = 1;
 
 let countUp = (page) => page.evaluate((counter) => {
-    let last = document.querySelector('option:last-child');
+    let last = document.querySelector('option:last-child').text;
     let selectedOption = document.querySelector('option[selected]');
     let select = document.querySelector('select');
 
-    if (last != selectedOption) {
+    if(selectedOption === null) {
+        select.selectedIndex = counter;
+        counter++;
+        return counter;
+    } else if (last != selectedOption.text) {
         select.selectedIndex = counter;
         counter++;
         return counter;
@@ -69,5 +73,7 @@ let scrape = () => puppeteer.launch({headless: false})
         ).then(() => browser.close())
     ).catch((err) => console.log(err));
 
-    module.exports = scrape;
+// scrape();
+
+module.exports = scrape;
 

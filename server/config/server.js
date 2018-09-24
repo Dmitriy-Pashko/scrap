@@ -23,5 +23,5 @@ app.use(function(req, res, next) {
 app.use('/api', routes);
 
 app.listen(port, function() {
-    console.log('derr');
+    console.log('Server listed on port ' + port);
 });

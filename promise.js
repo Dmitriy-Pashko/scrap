@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const saveData = require('./savedata');
+const saveData = require('./server/scrap/savedata');
 
 let scrape = () => puppeteer.launch({headless: false})
     .then((browser) => browser.newPage()

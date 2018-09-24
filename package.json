@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
     "scrap": "nodemon server/scrap/scraping.js",
-    "server": "nodemon server/config/server.js"
+    "server": "nodemon server/config/server.js",
+    "cron": "nodemon server/auto.js"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +17,9 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.12",
+    "passport-jwt": "^4.0.0",
     "puppeteer": "^1.7.0"
   },
   "devDependencies": {
