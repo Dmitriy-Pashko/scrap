@@ -5,7 +5,7 @@ const Users = require('../model/users');
 const secret = require('../config/secrets');
 
 const router = express.Router();
-const { sekretKey } = secret;
+const { secretKey } = secret;
 
 const sendError = res => e => res.status(500).send(e);
 
@@ -54,7 +54,7 @@ router.post('/authentication/login', (req, res) => {
       res.status(401).send({ success: false, msg: 'Authentication failed. User not found.' });
     } else if (user.password === req.body.password) {
       // check if password matches
-      const token = jwt.sign(user.toJSON(), sekretKey);
+      const token = jwt.sign(user.toJSON(), secretKey);
       // res.send(user);
       res.json({ token });
     } else {
@@ -75,9 +75,22 @@ router.get('/jobs/:page', (req, res) => {
     .catch(sendError(res));
 });
 
+router.post('/jobs', verifyToken, (req, res) => {
+  jwt.verify(req.token, secretKey, (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      const newJob = new Jobs(req.body);
+      newJob.save()
+        .then(job => res.json({ job, authData }))
+        .catch(sendError(res));
+    }
+  });
+});
+
 
 router.delete('/jobs/:job_id', verifyToken, (req, res) => {
-  jwt.verify(req.token, sekretKey, (err, authData) => {
+  jwt.verify(req.token, secretKey, (err, authData) => {
     if (err) {
       res.sendStatus(403);
     } else {
@@ -89,7 +102,7 @@ router.delete('/jobs/:job_id', verifyToken, (req, res) => {
 });
 
 router.put('/jobs/:job_id', verifyToken, (req, res) => {
-  jwt.verify(req.token, sekretKey, (err, authData) => {
+  jwt.verify(req.token, secretKey, (err, authData) => {
     if (err) {
       res.sendStatus(403);
     } else {

@@ -11,3 +11,5 @@ const manager = new CronJobManager(
     start: true,
   },
 );
+
+module.exports = manager;
