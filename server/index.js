@@ -1,7 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const routes = require('./routes/routes');
+// const routes = require('./routes/usefulFunc');
+const jobs = require('./routes/jobs');
+const login = require('./routes/login');
+const users = require('./routes/users');
 const secrets = require('./config/secrets');
 
 const app = express();
@@ -21,6 +24,8 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/api', routes);
+app.use('/api/users', users);
+app.use('/api/jobs', jobs);
+app.use('/api/authentication', login);
 
 app.listen(port, () => console.log(`Server listed on port ${port}`));
