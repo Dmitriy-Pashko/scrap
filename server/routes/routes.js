@@ -37,7 +37,7 @@ router.post('/authentication/register', (req, res) => {
           password: req.body.password,
         });
         newUser.save(() => {
-          res.json({ success: true, msg: 'Successful created new user.' });
+          res.json({ success: true, msg: 'Successful created new user.', newUser });
         });
       }
     });
@@ -59,6 +59,39 @@ router.post('/authentication/login', (req, res) => {
       res.json({ token });
     } else {
       res.status(401).send({ success: false, msg: 'Authentication failed. Wrong password.' });
+    }
+  });
+});
+
+router.get('/users/all', (req, res) => {
+  Users.find()
+    .exec()
+    .then(users => res.json(users))
+    .catch(sendError(res));
+});
+
+router.put('/users/:user_id', verifyToken, (req, res) => {
+  jwt.verify(req.token, secretKey, (err, authData) => {
+    console.log(req.params.user_id);
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      Users.findByIdAndUpdate(req.params.user_id, req.body, { new: true })
+        .exec()
+        .then(user => res.json({ user, authData }))
+        .catch(sendError(res));
+    }
+  });
+});
+
+router.delete('/users/:user_id', verifyToken, (req, res) => {
+  jwt.verify(req.token, secretKey, (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      Users.deleteOne({ _id: req.params.user_id })
+        .then(() => res.json({ message: 'user removed succesfully', authData }))
+        .catch(sendError(res));
     }
   });
 });
@@ -106,7 +139,7 @@ router.put('/jobs/:job_id', verifyToken, (req, res) => {
     if (err) {
       res.sendStatus(403);
     } else {
-      Jobs.findOneAndUpdate(req.params.job_id, req.body, { new: true })
+      Jobs.findByIdAndUpdate(req.params.job_id, req.body, { new: true })
         .exec()
         .then(job => res.json({ job, authData }))
         .catch(sendError(res));
