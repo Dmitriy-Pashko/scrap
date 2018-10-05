@@ -1,19 +1,19 @@
-import { action } from 'mobx';
-import store from './store';
-import api from './api';
+import { observable, action } from 'mobx';
+import store from './jobs-store';
+import api from './jobs-api';
 
 
 const jlist = {
-  jobslist: [],
+  jobsList: observable([]),
   setJobsList: action(function (list) {
     store.jobsList = list;
   }),
   fetch: action(function () {
     return api.fetchJobs()
-      .then((res) => {
+      .then(action((res) => {
         this.setJobsList(res.data);
         return res.data;
-      });
+      }));
   }),
   // delete: action(function (id) {
   //   api.delete(id);

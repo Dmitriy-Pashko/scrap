@@ -1,40 +1,31 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import store from '../../models/users/users-store';
+import usersController from './controller';
 
 class Users extends Component {
   constructor() {
     super();
-    this.state = {
-      users: [],
-    };
 
-    this.fetchUsers = this.fetchUsers.bind(this);
+    this.fetchUsers = usersController.fetchUsers.bind(this);
   }
 
   componentDidMount() {
     this.fetchUsers();
   }
 
-  fetchUsers() {
-    return axios.get('http://localhost:3001/api/users/all')
-      .then((res) => {
-        this.setState({ users: res.data });
-        return res.data;
-      });
-  }
-
   render() {
-    const { users } = this.state;
+    const { usersList } = store;
+    console.log(usersList);
     return (
       <div>
         <ul className="jobs-list">
           {
-            users.map(user => (
+            usersList.map(user => (
               <li key={user._id} className="card-list">
                 <Card>
                   <CardContent className="content">

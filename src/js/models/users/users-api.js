@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 const api = {
-  fetchJobs() {
-    return axios.get('http://localhost:3001/api/jobs/1');
-  },
+
   fetchUsers() {
     return axios.get('http://localhost:3001/api/users/all');
   },

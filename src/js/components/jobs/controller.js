@@ -1,4 +1,4 @@
-import jobsModel from '../../models/jobsModel';
+import jobsModel from '../../models/jobs/jobs-model';
 
 const jobs = {
   fetchJobs() {
