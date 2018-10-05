@@ -1,0 +1,16 @@
+.jobs-list {
+  margin:0;
+  padding: 24px;
+}
+
+.card-list {
+  margin-bottom: 10px;
+}
+
+.jobs-list li{
+  max-width: 345px;
+}
+
+.content {
+  min-height: 150px;
+}

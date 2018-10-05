@@ -6,7 +6,8 @@ module.exports = {
       "no-console": ["error", { allow: ["warn", "error", "log"] }],
       "no-else-return": ["error", {allowElseIf: true}],
       "prefer-destructuring": 0,
-      "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+      "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     },
     "env": {
       "browser": true,
