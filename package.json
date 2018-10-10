@@ -23,6 +23,7 @@
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
     "mobx": "^5.5.0",
+    "mobx-react": "^5.2.8",
     "mongoose": "^5.2.12",
     "passport-jwt": "^4.0.0",
     "puppeteer": "^1.7.0",

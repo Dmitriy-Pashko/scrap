@@ -13,7 +13,7 @@ ul {
 
 .sidebar {
   margin: 0;
-  padding: 0;
+  padding: 24px 0px;
   width: 15%;
   background-color: #f1f1f1;
   position: fixed;
@@ -21,8 +21,10 @@ ul {
   overflow: auto;
 }
 
-.sidebar-li:first-child {
-  padding-top: 24px;
+.sidebar-li:last-child {
+  width: 15%;
+  bottom:calc(0px + 24px);
+  position: fixed;
 }
 
 .sidebar-li a {

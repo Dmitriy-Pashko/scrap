@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import Jobs from './jobs/jobs';
 import Users from './users/users';
+import Login from './login/login';
 import '../../css/main.css';
 
 class FormContainer extends Component {
@@ -20,10 +21,12 @@ class FormContainer extends Component {
           <ul className="sidebar">
             <li className="sidebar-li"><Link to="/jobs">Jobs</Link></li>
             <li className="sidebar-li"><Link to="/users">Users</Link></li>
+            <li className="sidebar-li"><Link to="/login">Login</Link></li>
           </ul>
           <div className="main-window">
             <Route path="/jobs" component={Jobs} />
             <Route path="/users" component={Users} />
+            <Route path="/login" component={Login} />
           </div>
         </div>
       </BrowserRouter>

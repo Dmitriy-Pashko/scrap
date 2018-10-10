@@ -1,7 +1,10 @@
 import { observable } from 'mobx';
 
 const store = observable({
-  jobsList: [],
+  user: {
+    username: '',
+    password: '',
+  },
 });
 
 export default store;

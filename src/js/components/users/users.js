@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import store from '../../models/users/users-store';
 import usersController from './controller';
 
-class Users extends Component {
+const Users = observer(class Users extends Component {
   constructor() {
     super();
 
@@ -51,6 +52,6 @@ class Users extends Component {
       </div>
     );
   }
-}
+});
 
 export default Users;

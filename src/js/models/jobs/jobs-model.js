@@ -15,9 +15,10 @@ const jlist = {
         return res.data;
       }));
   }),
-  // delete: action(function (id) {
-  //   api.delete(id);
-  // }),
+  delete: action(function (id, e) {
+    e.preventDefault();
+    api.deleteJob(id);
+  }),
   // create: action(function (worker) {
   //   return api.create(worker);
   // }),

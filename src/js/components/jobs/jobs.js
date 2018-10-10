@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,24 +9,17 @@ import store from '../../models/jobs/jobs-store';
 import jobsController from './controller';
 import '../../../css/jobs.css';
 
-class Jobs extends Component {
+const Jobs = observer(class Jobs extends Component {
   constructor() {
     super();
 
     this.fetchJobs = jobsController.fetchJobs.bind(this);
+    this.deleteJob = jobsController.deleteJob.bind(this);
   }
 
   componentDidMount() {
     this.fetchJobs();
   }
-
-  // fetchJobs() {
-  //   return axios.get('http://localhost:3001/api/jobs/1')
-  //     .then((res) => {
-  //       this.setState({ jobs: res.data });
-  //       return res.data;
-  //     });
-  // }
 
   render() {
     const { jobsList } = store;
@@ -49,7 +43,7 @@ class Jobs extends Component {
                     <Button size="small" color="primary">
                       Upadte
                     </Button>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onClick={(e) => { this.deleteJob(job._id, e); }}>
                       Delete
                     </Button>
                   </CardActions>
@@ -60,6 +54,6 @@ class Jobs extends Component {
       </div>
     );
   }
-}
+});
 
 export default Jobs;
