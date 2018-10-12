@@ -8,6 +8,8 @@ module.exports = {
       "prefer-destructuring": 0,
       "no-underscore-dangle": ["error", { "allow": ["_id"] }],
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "prefer-arrow-callback": 0,
+      "func-names": ["error", "never"],
     },
     "env": {
       "browser": true,

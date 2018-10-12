@@ -4,7 +4,8 @@ const api = {
   fetchJobs() {
     return axios.get('http://localhost:3001/api/jobs/1');
   },
-  deleteJob(id) {
+  deleteJob(id, token) {
+    axios.defaults.headers.common['Authorization'] = `Berer ${token}`;
     return axios.delete(`http://localhost:3001/api/jobs/${id}`);
   },
   createJob(job) {

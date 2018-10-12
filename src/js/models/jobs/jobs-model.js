@@ -17,7 +17,9 @@ const jlist = {
   }),
   delete: action(function (id, e) {
     e.preventDefault();
-    api.deleteJob(id);
+    const token = sessionStorage.getItem('token');
+    console.log(token);
+    api.deleteJob(id, token);
   }),
   // create: action(function (worker) {
   //   return api.create(worker);

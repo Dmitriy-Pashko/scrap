@@ -4,7 +4,7 @@ const login = {
   loginUser(e, user) {
     return loginModel.login(e, user);
   },
-  hadnleChange(e) {
+  handleChange(e) {
     return loginModel.change(e);
   },
 };
