@@ -15,6 +15,7 @@ const Jobs = observer(class Jobs extends Component {
 
     this.fetchJobs = jobsController.fetchJobs.bind(this);
     this.deleteJob = jobsController.deleteJob.bind(this);
+    this.openModal = jobsController.openModal.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +41,7 @@ const Jobs = observer(class Jobs extends Component {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onClick={this.openModal}>
                       Upadte
                     </Button>
                     <Button size="small" color="primary" onClick={(e) => { this.deleteJob(job._id, e); }}>
